@@ -19,19 +19,24 @@
 
     <!-- Search for a city -->
     <div class="row">
-        <section class="col-3">
-            <h2>Search for a City: </h2>
-            <input value="New York"/>
-            <br>
-            <button>Search</button>
-        </section>
-    
-        <section class="col-9" id="current"></section>
-    
-        <section class="col-9 justify-content-end">
-            <h3>5-Day Forecast: </h3>
-            <div class="row justify-content-around" id="forecast"></div>
-        </section>
+        <div class="col-3">
+            <section class="col-10 justify-content-around">
+                <h2>Search for a City: </h2>
+                <input value="New York"/>
+                <br>
+                <button>Search</button>
+            </section>
+        </div>
+        
+        <div class="col-9">
+            <section class="col-12" id="current"></section>
+        
+            <section class="col-12">
+                <h3>5-Day Forecast: </h3>
+                <div class="row justify-content-around" id="forecast"></div>
+            </section>
+        </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
