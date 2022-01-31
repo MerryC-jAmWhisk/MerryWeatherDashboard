@@ -1,17 +1,22 @@
-var city_name = encodeURI(document.querySelector('input').value)
-var city = document.querySelector('input').value
 var API_key = '542559bf8f1de85b7659a97261de20e1'
-var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key
 
-console.log(api)
-var currentEl = document.getElementById('current')
 var forecastEl = document.getElementById('forecast')
+var searchEl = document.getElementById('searchBtn')
+var findEl = document.getElementById('find')
+var h2El = document.getElementById('name')
+var imgEl = document.getElementById('img')
+var p1El = document.getElementById('p1')
+var p2El = document.getElementById('p2')
+var p3El = document.getElementById('p3')
+var p4El = document.getElementById('p4')
 
 var today = moment().format("MM/DD/YYYY")
 
 // shows all necessary weather info
 function getWeather() {
-    
+    var city = document.getElementById('input').value
+    var city_name = encodeURI(document.getElementById('input').value)
+    var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key
     fetch(api)
     .then(function(res){
         return res.json()
@@ -28,24 +33,16 @@ function getWeather() {
         .then(function(res){
             return res.json()
         }).then(function(data){
-            // info for the current weather card
-            const name = document.createElement('h2')
-            const img = document.createElement('img')
-            img.setAttribute('class', 'icon');
-            img.setAttribute('src', ' http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png');
-            name.textContent = city;
-            name.appendChild(img);
-            const p1 = document.createElement('p')
-            p1.textContent = 'Temp: ' + data.current.temp + ' °F'; 
-            const p2 = document.createElement('p')
-            p2.textContent = 'Wind: ' + data.current.wind_speed + ' MPH'; 
-            const p3 = document.createElement('p')
-            p3.textContent = 'Humidity: ' + data.current.humidity + ' %'; 
-            const p4 = document.createElement('p')
-            p4.textContent = 'UV Index: ' + data.current.uvi;
-            currentEl.append(name,p1,p2,p3,p4);
-            
 
+            // info for the current weather card
+            h2El.textContent = city;
+            imgEl.setAttribute('src', ' http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png');
+            p1El.textContent = 'Temp: ' + data.current.temp + ' °F'; 
+            p2El.textContent = 'Wind: ' + data.current.wind_speed + ' MPH'; 
+            p3El.textContent = 'Humidity: ' + data.current.humidity + ' %'; 
+            p4El.textContent = 'UV Index: ' + data.current.uvi;
+            
+            
             // loop through and create cards for the next 5 days of weather forecast
             for(let i = 1; i < 6; i++){
                 console.log(data)
@@ -72,19 +69,19 @@ function getWeather() {
 
     })
 
-
 }
 
+function saveCity() {
+    var city = document.getElementById('input').value
+    localStorage.setItem('City Name', city);
+    const btn = document.createElement('button');
+    btn.textContent = localStorage.getItem('City Name');
+    btn.setAttribute('class', 'w-100 btn');
+    findEl.appendChild(btn);
 
-//one card with the current weather (dynamic), append and use current weather object
-//for loop for the 5 day forecast, current day is 0, so loop from index 1 (i<6)
-//within the for loop create dynamic cards
+}
 //save the input value in local storage and creat a button/card that display the name and get weather data
 //when click on the button get weather data from local storage
 
-
-
-
-
-
-getWeather()
+searchEl.addEventListener('click', getWeather)
+searchEl.addEventListener('click', saveCity)

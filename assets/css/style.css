@@ -1,9 +1,52 @@
 * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-button {
-    border-radius: 8px;
-    margin: 18px 35px;
+header {
+    background-image: linear-gradient(to right, rgb(42, 108, 194) , rgb(45, 3, 100));
+    text-align: center;
+    color: white;
+    padding: 6px 0;
+}
+
+.contents {
+    margin-top: 15px;
+}
+
+input {
+    border-radius: 5px;
+    border: none;
+    border: solid 2px grey;
+}
+
+.current {
+    border-style: solid;
+    border-color: darkgray
+}
+
+.search {
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 18px 0 20px 0;
     padding: 3px 30px;
+    background-color: rgb(100, 187, 245);
+    margin-bottom: solid gray;
+}
+
+.cards {
+    color: white;
+    background-color: rgb(17, 54, 71);
+    margin: 8px;
+}
+
+.btn {
+    border: none;
+    border-radius: 5px;
+    margin: 18px 0;
+    padding: 3px 30px;
+    background-color: lightgrey;
 }
