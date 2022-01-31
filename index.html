@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
@@ -14,60 +18,29 @@
     </header>
 
     <!-- Search for a city -->
-    <section>
-        <h2>Search for a City: </h2>
-        <input placeholder="San Diego"/>
-        <button>Search</button>
-    </section>
+    <div class="row">
+        <section class="col-3">
+            <h2>Search for a City: </h2>
+            <input value="New York"/>
+            <br>
+            <button>Search</button>
+        </section>
+    
+        <section class="col-9" id="current">
+            <h2>City Name</h2>
+            <p>Temp: </p>
+            <p>Wind: </p>
+            <p>Humidity: </p>
+            <p>UV Index: </p>
+        </section>
+    
+        <section class="col-9 justify-content-end">
+            <h3>5-Day Forecast: </h3>
+            <div class="row justify-content-around" id="forecast"></div>
+        </section>
+    </div>
 
-    <section>
-        <h2>City Name</h2>
-        <p>Temp: </p>
-        <p>Wind: </p>
-        <p>Humidity: </p>
-        <p>UV Index: </p>
-    </section>
-
-    <section>
-        <h3>5-Day Forecast: </h3>
-        <div>
-            <div>
-                <h4>Day1</h4>
-                <p>Temp: </p>
-                <p>Wind: </p>
-                <p>Humidity: </p>
-            </div>
-
-            <div>
-                <h4>Day2</h4>
-                <p>Temp: </p>
-                <p>Wind: </p>
-                <p>Humidity: </p>
-            </div>
-            
-            <div>
-                <h4>Day3</h4>
-                <p>Temp: </p>
-                <p>Wind: </p>
-                <p>Humidity: </p>
-            </div>
-
-            <div>
-                <h4>Day4</h4>
-                <p>Temp: </p>
-                <p>Wind: </p>
-                <p>Humidity: </p>
-            </div>
-
-            <div>
-                <h4>Day5</h4>
-                <p>Temp: </p>
-                <p>Wind: </p>
-                <p>Humidity: </p>
-            </div>
-        </div>
-    </section>
-
-    <script src="./assets/js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
