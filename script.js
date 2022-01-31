@@ -42,7 +42,9 @@ function getWeather() {
             p3El.textContent = 'Humidity: ' + data.current.humidity + ' %'; 
             p4El.textContent = 'UV Index: ' + data.current.uvi;
             
-            
+            // clear forecast content so each search replace
+            document.getElementById('forecast').innerHTML = "";
+
             // loop through and create cards for the next 5 days of weather forecast
             for(let i = 1; i < 6; i++){
                 console.log(data)
