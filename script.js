@@ -8,7 +8,7 @@ var imgEl = document.getElementById('img')
 var p1El = document.getElementById('p1')
 var p2El = document.getElementById('p2')
 var p3El = document.getElementById('p3')
-var p4El = document.getElementById('p4')
+var uviEl = document.getElementById('uvi')
 var cityBtnEl = document.getElementById('btn')
 
 var today = moment().format("MM/DD/YYYY")
@@ -45,7 +45,15 @@ function getWeather(city_name) {
             p1El.textContent = 'Temp: ' + data.current.temp + ' °F'; 
             p2El.textContent = 'Wind: ' + data.current.wind_speed + ' MPH'; 
             p3El.textContent = 'Humidity: ' + data.current.humidity + ' %'; 
-            p4El.textContent = 'UV Index: ' + data.current.uvi;
+            uviEl.textContent = data.current.uvi;
+            var uvi = uviEl.textContent
+            if(uvi < 3) {
+                uviEl.setAttribute('class', 'next uviLow');
+            } else if(uvi >= 3) {
+                uviEl.setAttribute('class', 'next uviMod');
+            } else if(uvi >= 8) {
+                uviEl.setAttribute('class', 'next uviHigh');
+            } else
             
             // clear forecast content so each search replace previous cards
             document.getElementById('forecast').innerHTML = "";
@@ -100,6 +108,7 @@ function saveCity() {
         btn.textContent = city;
         btn.setAttribute('class', 'w-100 btn');
         btn.setAttribute('id', 'btn')
+        // call back to getWeather() when click a previously searched city button
         btn.addEventListener('click', function(event){
             console.log(event.currentTarget.innerHTML)
             getWeather(event.currentTarget.innerHTML)
@@ -109,13 +118,12 @@ function saveCity() {
 
 }
 
-// when click on the previously searched city button the weather info of that city will show up again
+// display city name button after refresh
 function seePrevious(){
     var cityName = JSON.parse(localStorage.getItem('City Names'))
-    // loop through the city names array and call back to getWeather()
+    
     for(let i = 0; i < cityName.length; i++) {
         const btn = document.createElement('button');
-        // display city name according to button pressed
         btn.textContent = cityName[i];
         btn.setAttribute('class', 'w-100 btn');
         btn.setAttribute('id', 'btn')
@@ -125,7 +133,10 @@ function seePrevious(){
         })
         findEl.appendChild(btn);
     }
+
 }
+
+
 
 
 // execute getWeather() and saveCity() when user releases enter key on keyboard

@@ -27,6 +27,31 @@ input {
     border-color: darkgray
 }
 
+.uviLow {
+    color:white;
+    border-radius: 5px;
+    padding: 3px 10px;
+    background-color: green;
+}
+
+.uviMod {
+    color:white;
+    border-radius: 5px;
+    padding: 3px 10px;
+    background-color: orange;
+}
+
+.uviHigh {
+    color:white;
+    border-radius: 5px;
+    padding: 3px 10px;
+    background-color: red;
+}
+
+.next {
+    display: inline-block;
+}
+
 .search {
     color: white;
     border-radius: 5px;
