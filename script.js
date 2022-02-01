@@ -1,5 +1,4 @@
 var API_key = '542559bf8f1de85b7659a97261de20e1'
-
 var forecastEl = document.getElementById('forecast')
 var searchEl = document.getElementById('searchBtn')
 var findEl = document.getElementById('find')
@@ -17,6 +16,7 @@ function getWeather() {
     var city = document.getElementById('input').value
     var city_name = encodeURI(document.getElementById('input').value)
     var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key
+    
     fetch(api)
     .then(function(res){
         return res.json()
@@ -36,13 +36,14 @@ function getWeather() {
 
             // info for the current weather card
             h2El.textContent = city;
-            imgEl.setAttribute('src', ' http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png');
+            imgEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png');
+            h2El.appendChild(imgEl);
             p1El.textContent = 'Temp: ' + data.current.temp + ' °F'; 
             p2El.textContent = 'Wind: ' + data.current.wind_speed + ' MPH'; 
             p3El.textContent = 'Humidity: ' + data.current.humidity + ' %'; 
             p4El.textContent = 'UV Index: ' + data.current.uvi;
             
-            // clear forecast content so each search replace
+            // clear forecast content so each search replace previous cards
             document.getElementById('forecast').innerHTML = "";
 
             // loop through and create cards for the next 5 days of weather forecast
@@ -73,16 +74,36 @@ function getWeather() {
 
 }
 
+// save the input value in local storage and creates a button for future use
 function saveCity() {
     var city = document.getElementById('input').value
-    localStorage.setItem('City Name', city);
+
+    // save an empty array if nothing is saved at the start
+    if(localStorage.getItem('City Names') == null) {
+        localStorage.setItem('City Names', '[]');
+    }
+
+    // get newly searched city name and add it to the array
+    var cityNames = JSON.parse(localStorage.getItem('City Names'))
+    cityNames.push(city);
+    // save newly and previously searched city names to local storage in an array
+    localStorage.setItem('City Names', JSON.stringify(cityNames))
+    // create button element for the cities
     const btn = document.createElement('button');
-    btn.textContent = localStorage.getItem('City Name');
+    btn.textContent = city;
     btn.setAttribute('class', 'w-100 btn');
-    findEl.appendChild(btn);
+    btn.setAttribute('id', 'btn')
+    // if the same city is searched multiple times, do not create duplicate buttons
+    if() {
+        findEl.appendChild(btn);
+    } else {}
+
+
 
 }
-//save the input value in local storage and creat a button/card that display the name and get weather data
+// For each city in my cityNamesArray, append a button on the page
+// for loop that iterates over this array to make the buttons when the page is loaded.
+
 //when click on the button get weather data from local storage
 
 searchEl.addEventListener('click', getWeather)
