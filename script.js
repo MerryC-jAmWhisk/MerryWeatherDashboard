@@ -53,7 +53,7 @@ function getWeather(city_name) {
                 uviEl.setAttribute('class', 'next uviMod');
             } else if(uvi >= 8) {
                 uviEl.setAttribute('class', 'next uviHigh');
-            } else
+            } else {}
             
             // clear forecast content so each search replace previous cards
             document.getElementById('forecast').innerHTML = "";
@@ -128,6 +128,7 @@ function seePrevious(){
         btn.setAttribute('class', 'w-100 btn');
         btn.setAttribute('id', 'btn')
         btn.addEventListener('click', function(event){
+
             console.log(event.currentTarget.innerHTML)
             getWeather(event.currentTarget.innerHTML)
         })
@@ -135,8 +136,6 @@ function seePrevious(){
     }
 
 }
-
-
 
 
 // execute getWeather() and saveCity() when user releases enter key on keyboard
@@ -149,5 +148,5 @@ input.addEventListener("keyup", function(event) {
 // when click on the search button get weather data from api and also saves city info to local storage
 searchEl.addEventListener('click', getWeather)
 searchEl.addEventListener('click', saveCity)
-
+seePrevious();
 
