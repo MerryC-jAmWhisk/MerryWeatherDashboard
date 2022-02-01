@@ -89,6 +89,7 @@ function saveCity() {
     if(cityNames.includes(city)) {
         console.log("City already searched!")
     } else {
+        // add newly searched city to previous
         cityNames.push(city);
         // save newly and previously searched city names to local storage in an array
         localStorage.setItem('City Names', JSON.stringify(cityNames))
@@ -104,8 +105,12 @@ function saveCity() {
 
 // when click on the previously searched city button the weather info of that city will show up again
 function seePrevious(){
-    cityBtnEl.addEventListener('click', getWeather)
-
+    var cityName = JSON.parse(localStorage.getItem('City Names'))
+    //for(let i = 0; i < cityName.length; i++) {
+        //if(cityName[i] = city_name) {
+            //getWeather()
+        //}
+    //}
 }
 
 
@@ -119,4 +124,5 @@ input.addEventListener("keyup", function(event) {
 // when click on the search button get weather data from api and also saves city info to local storage
 searchEl.addEventListener('click', getWeather)
 searchEl.addEventListener('click', saveCity)
+//cityBtnEl.addEventListener('click', seePrevious)
 
