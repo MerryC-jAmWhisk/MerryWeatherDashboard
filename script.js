@@ -14,9 +14,9 @@ var cityBtnEl = document.getElementById('btn')
 var today = moment().format("MM/DD/YYYY")
 
 // shows all necessary weather info
-function getWeather() {
-    var city = document.getElementById('input').value
-    var city_name = encodeURI(document.getElementById('input').value)
+function getWeather(city_name) {
+    var city = document.getElementById('input').value || city_name
+    var city_name = encodeURI(document.getElementById('input').value) || city_name
     var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key
     
     fetch(api)
@@ -24,6 +24,8 @@ function getWeather() {
         return res.json()
     })
     .then(function(data){
+        // clear input after search
+        document.getElementById('input').value = ""
         // use lat and lon values found in the current weather api in order to use one call api
         console.log(data)
         const lat = data.coord.lat
@@ -98,6 +100,10 @@ function saveCity() {
         btn.textContent = city;
         btn.setAttribute('class', 'w-100 btn');
         btn.setAttribute('id', 'btn')
+        btn.addEventListener('click', function(event){
+            console.log(event.currentTarget.innerHTML)
+            getWeather(event.currentTarget.innerHTML)
+        })
         findEl.appendChild(btn);
     }
 
@@ -106,11 +112,19 @@ function saveCity() {
 // when click on the previously searched city button the weather info of that city will show up again
 function seePrevious(){
     var cityName = JSON.parse(localStorage.getItem('City Names'))
-    //for(let i = 0; i < cityName.length; i++) {
-        //if(cityName[i] = city_name) {
-            //getWeather()
-        //}
-    //}
+    // loop through the city names array and call back to getWeather()
+    for(let i = 0; i < cityName.length; i++) {
+        const btn = document.createElement('button');
+        // display city name according to button pressed
+        btn.textContent = cityName[i];
+        btn.setAttribute('class', 'w-100 btn');
+        btn.setAttribute('id', 'btn')
+        btn.addEventListener('click', function(event){
+            console.log(event.currentTarget.innerHTML)
+            getWeather(event.currentTarget.innerHTML)
+        })
+        findEl.appendChild(btn);
+    }
 }
 
 
@@ -124,5 +138,5 @@ input.addEventListener("keyup", function(event) {
 // when click on the search button get weather data from api and also saves city info to local storage
 searchEl.addEventListener('click', getWeather)
 searchEl.addEventListener('click', saveCity)
-//cityBtnEl.addEventListener('click', seePrevious)
+
 
