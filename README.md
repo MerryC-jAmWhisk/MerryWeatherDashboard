@@ -6,3 +6,6 @@ All searched cities are saved in a button under the search button, and users can
 
 ### Preview
 ![image](https://user-images.githubusercontent.com/92895891/152084315-a3fee599-0a59-42b3-aa07-f20fe3518755.png)
+
+
+website link: https://merryc-jamwhisk.github.io/MerryWeatherDashboard/
