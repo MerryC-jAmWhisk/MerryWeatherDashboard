@@ -17,7 +17,7 @@ var today = moment().format("MM/DD/YYYY")
 function getWeather(city_name) {
     var city = document.getElementById('input').value || city_name
     var city_name = encodeURI(document.getElementById('input').value) || city_name
-    var api = 'http://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key
+    var api = 'https://api.openweathermap.org/data/2.5/weather?q=' + city_name + '&appid=' + API_key
     
     fetch(api)
     .then(function(res){
@@ -40,7 +40,7 @@ function getWeather(city_name) {
 
             // info for the current weather card
             h2El.textContent = city + '(' + today + ')';
-            imgEl.setAttribute('src', 'http://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png');
+            imgEl.setAttribute('src', 'https://openweathermap.org/img/wn/' + data.current.weather[0].icon + '.png');
             h2El.appendChild(imgEl);
             p1El.textContent = 'Temp: ' + data.current.temp + ' °F'; 
             p2El.textContent = 'Wind: ' + data.current.wind_speed + ' MPH'; 
@@ -67,7 +67,7 @@ function getWeather(city_name) {
                 head.textContent = moment().add(i, 'days').format("MM/DD/YYYY");
                 const icon = document.createElement('img')
                 var iconImg = data.daily[i].weather[0].icon
-                icon.setAttribute('src', ' http://openweathermap.org/img/wn/' + iconImg + '.png');
+                icon.setAttribute('src', ' https://openweathermap.org/img/wn/' + iconImg + '.png');
                 const p1 = document.createElement('p')
                 p1.textContent = 'Temp: ' + data.daily[i].temp.day + ' °F'; 
                 const p2 = document.createElement('p')
